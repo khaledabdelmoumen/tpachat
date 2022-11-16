@@ -6,7 +6,7 @@ pipeline {
             stage('Git Checkout ') {
                   steps {
                       sh 'rm -fr tpachat'
-                        git branch: 'khaled', credentialsId: 'GitAccessLogin', url: 'https://github.com/khaledabdelmoumen/tpachat.git'
+                        git branch: 'khaled', credentialsId: 'Gitacceslogin', url: 'https://github.com/khaledabdelmoumen/tpachat.git'
                   }
             }
                      stage('run application ') {
