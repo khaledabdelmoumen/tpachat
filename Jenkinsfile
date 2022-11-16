@@ -13,17 +13,23 @@ pipeline {
                         sh 'mvn clean -Pprod'
                     }
             }  
-            stage('MVN SONARQUBE')
-        {
-        steps{
-        sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a'
-        }
-        }
-            stage('JUnit Test ') {
+                     stage('JUnit Test ') {
                    steps {
                         sh 'mvn test -Ptest'
                     }
             }
+            stage('MVN SONARQUBE')
+                  {
+                          steps{
+                                 withSonarQubeEnv (installationName:'sonarqube'){
+              sh """./mvnw sonar:sonar \
+  -Dsonar.projectKey=sonarqube \
+  -Dsonar.host.url=http://192.168.33.10:9000""" 
+}
+                                      
+                               }
+                  }
+           
              stage('MVN COMPILE')
                 {
                     steps {
