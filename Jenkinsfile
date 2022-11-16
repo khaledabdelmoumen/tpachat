@@ -11,7 +11,7 @@ pipeline {
             }
                      stage('run application ') {
                    steps {
-                   
+                        sh 'pwd'
                       sh ' sudo docker compose up -d '
                     }
             }
