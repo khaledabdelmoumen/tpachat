@@ -5,7 +5,7 @@ pipeline {
     stages {
             stage('Git pull ') {
                    steps {
-                        git branch: 'main', credentialsId: 'GitAccessLogin', url: 'https://github.com/khaledabdelmoumen/tpachat.git'
+                        git branch: 'khaled', credentialsId: 'GitAccessLogin', url: 'https://github.com/khaledabdelmoumen/tpachat.git'
                    }
             }
                   stage('Maven Clean ') {
@@ -13,19 +13,17 @@ pipeline {
                         sh 'mvn clean -Pprod'
                     }
             }  
-                     stage('JUnit Test ') {
-                   steps {
-                        sh 'mvn test -Ptest'
-                    }
+                   
+        stage('MOCKITO') {
+            steps {
+           sh 'mvn clean test -Ptest -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest' 
             }
-            stage('MVN SONARQUBE')
-                  {
-                          steps{
-                                 withSonarQubeEnv (installationName:'sonarqube'){
-              sh """./mvnw sonar:sonar \
-  -Dsonar.projectKey=sonarqube \
-  -Dsonar.host.url=http://192.168.33.10:9000""" 
-}
+        }
+         stage('JUNIT') {
+            steps {
+            sh 'mvn clean test -Ptest -Dtest=com.esprit.examen.services.ProduitServiceImplTest -Dmaven.test.failure.ignore=true'  
+            }
+        }
                                       
                                }
                   }
