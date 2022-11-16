@@ -17,7 +17,7 @@ services:
       - mysqldb
     build:
       context: "./"
-      dockerfile: "dockerfile"
+      dockerfile: "Dockerfile"
     restart: on-failure
     env_file: ./.env
     ports:
