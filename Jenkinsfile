@@ -24,10 +24,7 @@ pipeline {
             sh 'mvn clean test -Ptest -Dtest=com.esprit.examen.services.ProduitServiceImplTest -Dmaven.test.failure.ignore=true'  
             }
         }
-                                      
-                               }
-                  }
-           
+                       
              stage('MVN COMPILE')
                 {
                     steps {
