@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: tpAchatProject
+Implementation-Version: 1.0
+Built-By: gsm
+Implementation-Vendor-Id: com.esprit.examen
+Build-Jdk: 1.8.0_51
+Implementation-URL: https://spring.io/projects/spring-boot/tpAchatProj
+ ect
+Created-By: Maven Integration for Eclipse
+

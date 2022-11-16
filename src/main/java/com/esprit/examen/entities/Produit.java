@@ -48,6 +48,27 @@ public class Produit implements Serializable {
 	@JsonIgnore
 	private CategorieProduit categorieProduit;
 	
+	
+	public Produit( String codeProduit, String libelleProduit, float prix, Date dateCreation,
+			Date dateDerniereModification) {
+		super();
+		this.codeProduit = codeProduit;
+		this.libelleProduit = libelleProduit;
+		this.prix = prix;
+		this.dateCreation = dateCreation;
+		this.dateDerniereModification = dateDerniereModification;
+	}
+
+
+	public Produit(String string, String string2) {
+		this.codeProduit = string;
+		this.libelleProduit = string2;
+	
+		
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 
 
 	
