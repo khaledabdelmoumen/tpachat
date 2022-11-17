@@ -22,7 +22,7 @@ pipeline {
             }
             stage('JUnit Test ') {
                    steps {
-                        sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest'
+                        sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
                     }
             }
              stage('MVN COMPILE')
