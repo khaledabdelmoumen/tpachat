@@ -25,12 +25,12 @@ pipeline {
                         sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
                     }
             }
-        stage('MVN SONARQUBE')
+        /*stage('MVN SONARQUBE')
                 {
               steps{
                          sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a'
                      }
-                }
+                }*/
              stage('MVN COMPILE')
                 {
                     steps {
@@ -48,7 +48,15 @@ pipeline {
                       sh 'sudo docker build -t devimage .'
                     }
             }
-    }
+        stage('MVN deploy')
+              {
+                steps
+                {
+                    sh 'mvn clean deploy -Pprod'
+                    }
+                }
+         
+    
        /*    stage('MVN SONARQUBE')
                 {
               steps{
