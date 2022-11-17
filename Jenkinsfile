@@ -1,46 +1,51 @@
 pipeline {
     agent {label 'maven'}
     
-
+/*environment {
+        registry = "saharr/dockertpachat-pipeline"
+        registryCredential = "dockerhub"
+        dockerImage = ''
+    }*/
     stages {
             stage('Git Checkout ') {
                   steps {
-                      sh 'rm -fr tpachat'
-                        git branch: 'khaled', credentialsId: 'gitacceslogin', url: 'https://github.com/khaledabdelmoumen/tpachat.git'
+                  git branch: 'khaled', credentialsId: 'gitacceslogin', url: 'https://github.com/khaledabdelmoumen/tpachat.git'
+           
                   }
             }
+            
                      stage('run application ') {
                    steps {
-                        sh 'pwd'
+                   
                       sh ' sudo docker compose up -d '
                     }
             }
                   stage('Maven Clean ') {
                    steps {
-                        sh 'mvn clean install -Pprod'
+                        sh 'mvn clean '
                     }
             }
-        stage('MOK Test ') {
+            stage('JUnit Test ') {
                    steps {
-                        sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
+                        sh 'mvn test -Ptest'
                     }
             }
-        stage('MVN SONARQUBE')
-                {
-              steps{
-                         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a'
-                     }
-                }
              stage('MVN COMPILE')
                 {
                     steps {
-                         sh 'mvn compile -Ptest'
+                         sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
                          }
                  }
        
+                   stage('MVN SONARQUBE')
+                 {
+                 steps{
+                          sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a -Ptest'
+                      }
+                 }
             stage('Build Package ') {
                    steps {
-                        sh 'mvn clean install -Ptest'
+                        sh 'mvn clean install'
                     }
             }
             stage('Build Image Docker') {
@@ -48,25 +53,40 @@ pipeline {
                       sh 'sudo docker build -t devimage .'
                     }
             }
-       /* stage('MVN deploy')
+                 stage('MVN deploy jar ')
               {
                 steps
                 {
-                    sh 'mvn clean deploy -Pprod'
+                    sh 'mvn clean deploy '
                     }
                 }
-         */
-    
-       /*    stage('MVN SONARQUBE')
+                /*
+                     stage('docker deploy image ')
+              {
+                steps
                 {
-              steps{
-                         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a -Ptest'
-                     }
-                }*/
-           /* stage('JUnit Test ') {
-                   steps {
-                        sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
+                    sh 'mvn clean deploy '
                     }
-            }*/
-}
+                }*/
+                
+                
+              /*  stage('Building our image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }*/
+        /*stage('Deploy our image') {
+            steps {
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }*/
+                
+                
+    }
 }
