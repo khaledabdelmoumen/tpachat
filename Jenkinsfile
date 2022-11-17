@@ -25,6 +25,7 @@ pipeline {
               steps{
                          sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a -Ptest'
                      }
+                }
            /* stage('JUnit Test ') {
                    steps {
                         sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
