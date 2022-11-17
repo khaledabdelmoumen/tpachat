@@ -38,12 +38,12 @@ pipeline {
                     sh 'mvn clean deploy '
                     }
                 }*/
-                    stage('MVN SONARQUBE')
+                   /* stage('MVN SONARQUBE')
                 {
               steps{
                          sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a -Ptest'
                      }
-                }
+                }*/
             stage('Build Package ') {
                    steps {
                         sh 'mvn clean install -Ptest'
