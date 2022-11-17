@@ -26,26 +26,13 @@ pipeline {
                          sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a -Ptest'
                      }
                 }
-           /* stage('JUnit Test ') {
-                   steps {
-                        sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
-                    }
-            }*/
              stage('MVN COMPILE')
                 {
                     steps {
                          sh 'mvn compile -Ptest'
                          }
                  }
-            /*stage('MVN deploy')
-              {
-                steps
-                {
-                    sh 'mvn clean deploy '
-                    }
-                }*/
-                   /* 
-                }*/
+       
             stage('Build Package ') {
                    steps {
                         sh 'mvn clean install -Ptest'
@@ -57,4 +44,15 @@ pipeline {
                     }
             }
     }
+       /*    stage('MVN SONARQUBE')
+                {
+              steps{
+                         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a -Ptest'
+                     }
+                }*/
+           /* stage('JUnit Test ') {
+                   steps {
+                        sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
+                    }
+            }*/
 }
