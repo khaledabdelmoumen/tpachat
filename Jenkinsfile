@@ -17,7 +17,7 @@ pipeline {
             }
                   stage('Maven Clean ') {
                    steps {
-                        sh 'mvn clean '
+                        sh 'mvn clean install -Pprod'
                     }
             }
         stage('MVN SONARQUBE')
