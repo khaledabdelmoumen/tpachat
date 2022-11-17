@@ -20,6 +20,11 @@ pipeline {
                         sh 'mvn clean install -Pprod'
                     }
             }
+        stage('MOK Test ') {
+                   steps {
+                        sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
+                    }
+            }
         stage('MVN SONARQUBE')
                 {
               steps{
