@@ -20,11 +20,16 @@ pipeline {
                         sh 'mvn clean '
                     }
             }
-            stage('JUnit Test ') {
+        stage('MVN SONARQUBE')
+                {
+              steps{
+                         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a -Ptest'
+                     }
+           /* stage('JUnit Test ') {
                    steps {
                         sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
                     }
-            }
+            }*/
              stage('MVN COMPILE')
                 {
                     steps {
@@ -38,11 +43,7 @@ pipeline {
                     sh 'mvn clean deploy '
                     }
                 }*/
-                   /* stage('MVN SONARQUBE')
-                {
-              steps{
-                         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a -Ptest'
-                     }
+                   /* 
                 }*/
             stage('Build Package ') {
                    steps {
