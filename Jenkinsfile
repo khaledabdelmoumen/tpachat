@@ -48,14 +48,14 @@ pipeline {
                       sh 'sudo docker build -t devimage .'
                     }
             }
-        stage('MVN deploy')
+       /* stage('MVN deploy')
               {
                 steps
                 {
                     sh 'mvn clean deploy -Pprod'
                     }
                 }
-         
+         */
     
        /*    stage('MVN SONARQUBE')
                 {
