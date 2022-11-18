@@ -9,7 +9,7 @@ pipeline {
     stages {
             stage('Git Checkout ') {
                   steps {
-                  git branch: 'khaled', credentialsId: 'gitacceslogin', url: 'https://github.com/khaledabdelmoumen/tpachat.git'
+                   git branch: 'main', credentialsId: 'gitaccess', url: 'https://github.com/sahar-gharrad/tpAchat.git'
            
                   }
             }
@@ -25,32 +25,24 @@ pipeline {
                         sh 'mvn clean '
                     }
             }
-            stage('MVN COMPILE')
-                {
-                    steps {
-                         sh 'mvn compile -Ptest'
-                         }
-                 }
-      
             stage('JUnit Test ') {
                    steps {
                         sh 'mvn test -Ptest'
                     }
             }
-     
-             stage('Mokito')
+             stage('MVN COMPILE')
                 {
                     steps {
-                         sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
+                         sh 'mvn compile -Ptest'
                          }
                  }
-         stage('MVN SONARQUBE')
+       
+                   stage('MVN SONARQUBE')
                  {
                  steps{
                           sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a -Ptest'
                       }
                  }
-                 
             stage('Build Package ') {
                    steps {
                         sh 'mvn clean install'
@@ -61,7 +53,7 @@ pipeline {
                       sh 'sudo docker build -t devimage .'
                     }
             }
-              /*   stage('MVN deploy jar ')
+                /* stage('MVN deploy jar ')
               {
                 steps
                 {
@@ -78,14 +70,14 @@ pipeline {
                 }*/
                 
                 
-              /*  stage('Building our image') {
+            /*   stage('Building our image') {
             steps {
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
-        }*/
-        /*stage('Deploy our image') {
+        }
+        stage('Deploy our image') {
             steps {
                 script {
                     docker.withRegistry( '', registryCredential ) {
