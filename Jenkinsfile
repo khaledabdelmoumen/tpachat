@@ -9,7 +9,7 @@ pipeline {
     stages {
             stage('Git Checkout ') {
                   steps {
-                   git branch: 'main', credentialsId: 'gitaccesslogin', url: 'https://github.com/khaledabdelmoumen/tpachat.git'
+                   git branch: 'khaled', credentialsId: 'gitaccesslogin', url: 'https://github.com/khaledabdelmoumen/tpachat.git'
            
                   }
             }
