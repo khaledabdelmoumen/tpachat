@@ -53,13 +53,13 @@ pipeline {
                       sh 'sudo docker build -t devimage .'
                     }
             }
-                 stage('MVN deploy jar ')
+              /*   stage('MVN deploy jar ')
               {
                 steps
                 {
                     sh 'mvn clean deploy '
                     }
-                }
+                }*/
                 /*
                      stage('docker deploy image ')
               {
