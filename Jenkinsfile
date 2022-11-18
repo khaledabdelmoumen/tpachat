@@ -25,24 +25,32 @@ pipeline {
                         sh 'mvn clean '
                     }
             }
+            stage('MVN COMPILE')
+                {
+                    steps {
+                         sh 'mvn compile -Ptest'
+                         }
+                 }
+          stage('MVN SONARQUBE')
+                 {
+                 steps{
+                          sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a'
+                      }
+                 }
             stage('JUnit Test ') {
                    steps {
                         sh 'mvn test -Ptest'
                     }
             }
-             stage('MVN COMPILE')
+     
+             stage('Mokito')
                 {
                     steps {
                          sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplMocktest -Ptest'
                          }
                  }
        
-                   stage('MVN SONARQUBE')
-                 {
-                 steps{
-                          sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=21091520a'
-                      }
-                 }
+                 
             stage('Build Package ') {
                    steps {
                         sh 'mvn clean install'
